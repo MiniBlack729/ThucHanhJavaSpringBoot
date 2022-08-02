@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--To use Thymeleaf with Spring Security for the view, make sure you declare the relevant XML namespaces like this:-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Users</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+<body>
+<!--To show a section that is for only authenticated users -->
+<h1 sec:authorize="isAuthenticated()" >
+    Hello <span sec:authentication="name">Username</span>
+    <i><span sec:authentication="principal.authorities">Roles</span></i>
+</h1>
+<!--dung action login, logout co san cua thu vien ben ham @Override trang LoginConfig-->
+<form th:action="@{/logout}" method="post">
+    <input style="text-align: right;" type="submit" value="SignOut"/>
+</form>
+<!--hien thi link Create chi danh cho account admin va manager-->
+<h4 sec:authorize="hasAnyAuthority('Admin', 'Manager')">
+    <a href="/createAdmin">Create new Admin, Manager, User</a>
+</h4>
+<table class="table table-responsive">
+    <thead>
+    <th>Id</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>User Name</th>
+    <th>Password</th>
+    <th>Email</th>
+    <th>Action</th>
+    </thead>
+    <tbody>
+    <tr th:each="user:${list}">
+        <td th:text = "${user.getId()}"></td>
+        <td th:text = "${user.getFirstname()}"></td>
+        <td th:text = "${user.getLastname()}"></td>
+        <td th:text = "${user.getUsername()}"></td>
+        <td th:text = "${user.getPassword()}"></td>
+        <td th:text = "${user.getEmail()}"></td>
+        <td><a th:href="@{/deleteAccount/{id}(id=${user.getId()})}">Delete</a></td>
+<!--        <td><a th:href="@{/updateAccount/{id}(id=${user.getId()})}">Update</a></td>-->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="http://themyleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search by Price</title>
+</head>
+<body>
+<h1>Search Camera by Price</h1>
+<form th:action="@{/searchPrice}">
+    From Price:
+    <input type="number"  name="from" id="from"  required />
+    To Price:
+    <input type="number"  name="to" id="to" required />
+    &nbsp;
+    <input type="submit" value="Search" />
+</form>
+<table border="1">
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th colspan="2">Action</th>
+    </thead>
+    <tbody>
+    <tr th:each="camera:${list}">
+        <td th:text = "${camera.getId()}"></td>
+        <td th:text = "${camera.getName()}"></td>
+        <td th:text = "${camera.getPrice()}"></td>
+        <td><a th:href="@{/delete/{id}(id=${camera.getId()})}">Delete</a></td>
+        <td><a th:href="@{/update/{id}(id=${camera.getId()})}">Update</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

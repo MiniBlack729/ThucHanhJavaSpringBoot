@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<a href="/create">Create new Camera</a>
+<!--search trang rieng-->
+<a href="/searchPrice">Search Camera By Price</a>
+<a href="/searchName">Search Camera By Name</a>
+<br><br>
+<!--search ngay trang index-->
+<form th:action="@{/searchPrice}">
+  From Price:
+  <input type="number"  name="from" id="from"  required />
+  To Price:
+  <input type="number"  name="to" id="to" required />
+  &nbsp;
+  <input type="submit" value="Search" />
+</form>
+<strong th:text="${result}" style="color: red;"></strong>
+<hr>
+<form th:action="@{/searchName}">
+  <input type="text"  name="cameraName" placeholder="Enter a keyword" />
+  <input type="submit" value="Search" />
+</form>
+<br><br>
+<table border="1">
+  <thead>
+  <th>Id</th>
+  <th>Name</th>
+  <th>Price</th>
+  <th colspan="2">Action</th>
+  </thead>
+  <tbody>
+  <tr th:each="camera:${list}">
+    <td th:text = "${camera.getId()}"></td>
+    <td th:text = "${camera.getName()}"></td>
+    <td th:text = "${camera.getPrice()}"></td>
+    <td><a th:href="@{/delete/{id}(id=${camera.getId()})}">Delete</a></td>
+    <td><a th:href="@{/update/{id}(id=${camera.getId()})}">Update</a></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

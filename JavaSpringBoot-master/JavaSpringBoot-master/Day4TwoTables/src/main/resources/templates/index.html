@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/create">Create new Camera</a>
+<table border="1">
+    <thead>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th colspan="2">Action</th>
+    </thead>
+    <tbody>
+    <tr th:each="product:${list}">
+        <td th:text = "${product.getPro_id()}"></td>
+        <td th:text = "${product.getPro_name()}"></td>
+        <td th:text = "${product.getPro_price()}"></td>
+<!--        product.getMan_id().getMan_name() là tham chiếu tới name của table manufacturer qua foreign key man_id-->
+        <td th:text = "${product.getMan_id().getMan_name()}"></td>
+        <td><a th:href="@{/delete/{id}(id=${product.getPro_id()})}">Delete</a></td>
+        <td><a th:href="@{/update/{id}(id=${product.getPro_id()})}">Update</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

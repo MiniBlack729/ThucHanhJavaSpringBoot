@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+    <h2>Update Employee</h2>
+    <form th:action="@{save}" th:object="${employee}" method="post">
+        <!--    lưu các value trong các field vào obj employee rồi access vào hàm save để create-->
+        <table>
+            <tr>
+                <td>Employee ID</td>
+                <td><input type="text" th:field="*{id}" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td>Fisrt Name</td>
+                <td><input type="text" th:field="*{firstname}"/></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" th:field="*{lastname}"/></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" th:field="*{email}"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="Create"/>
+    </form>
+</body>
+</html>

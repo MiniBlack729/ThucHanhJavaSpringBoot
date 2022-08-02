@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book | Edit</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<h1>Create / Update</h1>
+<div th:if="${errorMessage != null}" th:utext="errorMessage">..</div>
+<form th:action="@{/save}" th:object="${book}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <div>
+        Title: <input th:field="*{title}"/>
+        <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}">..</span>
+    </div>
+    <div>
+        Price <input th:field="*{price}"/>
+        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">..</span>
+    </div>
+    <div><input type="submit" value="save"/></div>
+</form>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<!--xmlns:th="http://thymeleaf.org" là template, đặt th là biến để dùng-->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <a href="/create">Create new product</a>
+<br><br>
+<h2>Product List</h2>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+        </thead>
+        <tbody>
+            <tr th:each="product:${list}">
+                <td th:text = "${product.getId()}"></td>
+                <td th:text = "${product.getName()}"></td>
+                <td th:text = "${product.getBrand()}"></td>
+                <td th:text = "${product.getPrice()}"></td>
+                <td><a th:href="@{/delete/{id}(id=${product.getId()})}">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

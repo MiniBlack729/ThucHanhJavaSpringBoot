@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Product</title>
+</head>
+<body>
+<h1>Create</h1>
+<form th:action="@{save}" th:object="${product}" method="post">
+<!--    lưu các value trong các field vào obj product rồi access vào hàm save để create-->
+    <table>
+        <tr>
+            <td>Name</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td>Brand</td>
+            <td><input type="text" th:field="*{brand}"/></td>
+            <td>Price</td>
+            <td><input type="number" th:field="*{price}"/></td>
+        </tr>
+    </table>
+    <input type="submit" value="Create"/>
+</form>
+</body>
+</html>

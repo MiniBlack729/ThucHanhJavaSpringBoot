@@ -1,0 +1,39 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<h1>Create / Update</h1>
+<form th:action="@{/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td> <input th:field="*{pro_id}"/></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td> <input th:field="*{pro_name}"/></td>
+            <td th:if="${#fields.hasErrors('pro_name')}" th:errors="*{pro_name}"></td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td> <input th:field="*{pro_price}"/></td>
+            <td th:if="${#fields.hasErrors('pro_price')}" th:errors="*{pro_price}"></td>
+        </tr>
+        <tr>
+            <td>Manufacturer</td>
+            <td>
+                <select th:field="*{man_id}">
+                    <option  th:each="item:${manus}" th:value="${item.man_id}" th:text="${item.man_name}" th:name="${product.man_id}">1</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="save"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

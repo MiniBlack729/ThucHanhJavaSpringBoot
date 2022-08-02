@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${employee}" th:action="@{/save}" method="post">
+    <table>
+        <tr>
+            <td>Enter Name</td>
+            <td><input type="text" th:field="*{empname}"></td>
+            <td><p th:if="${#fields.hasErrors('empname')}" th:errors="*{empname}" style="color: #ff0000"></p></td>
+        </tr>
+        <tr>
+            <td>Enter Phone</td>
+            <td><input type="text" th:field="*{phone}"></td>
+            <td><p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" style="color: #ff0000"></p></td>
+        </tr>
+        <tr>
+            <td>Enter Salary</td>
+            <td><input type="number" th:field="*{salary}"></td>
+            <td><p th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}" style="color: #ff0000"></p></td>
+        </tr>
+        <tr>
+            <td>Enter Deparment</td>
+            <td>
+                <select th:field="*{departmentbyid}">
+                    <option th:each="department: ${department}" th:text="${department.depname}" th:value="${department.depid}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" name="Submit">
+</form>
+</body>
+</html>
